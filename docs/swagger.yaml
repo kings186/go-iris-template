@@ -1,0 +1,74 @@
+basePath: /v2
+definitions:
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  model.User:
+    properties:
+      createdAt:
+        description: 创建时间和修改时间，GORM 会自动处理
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      gender:
+        description: 假设性别用字符串表示，如 "male" 或 "female"
+        type: string
+      id:
+        type: integer
+      password:
+        type: string
+      phoneNumber:
+        type: string
+      updatedAt:
+        type: string
+      username:
+        type: string
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: Swagger Example API
+  version: "1.0"
+paths:
+  /users/{id}:
+    get:
+      consumes:
+      - application/json
+      description: Get user by ID
+      operationId: get-user-by-id
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.User'
+        "400":
+          description: Invalid ID supplied
+          schema:
+            type: string
+        "404":
+          description: User not found
+          schema:
+            type: string
+      summary: GetUserByID
+swagger: "2.0"

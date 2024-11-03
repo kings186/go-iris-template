@@ -6,6 +6,11 @@ import (
 	"gorm.io/gorm"
 )
 
+// @SWGModel(
+//
+//	description="User Model"
+//
+// )
 type User struct {
 	gorm.Model
 	Username    string `gorm:"unique"`
