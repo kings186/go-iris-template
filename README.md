@@ -5,11 +5,16 @@ Template to develop the web application with iris framework.
 
 #### Software Architecture
 Just the basic structure of the web application.
+Excute the swagger command to generate the API document:
+```
+  go run github.com/swaggo/swag/cmd/swag@latest init --parseDependency --parseInternal
+```
 
 #### Installation
 
 1.  go mod tidy
 2.  go run main.go
+3.  go run  github.com/silenceper/gowatch  -p ./main.go (Hot Deployment)
 
 #### Instructions
 

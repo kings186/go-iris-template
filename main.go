@@ -13,9 +13,9 @@ import (
 	"github.com/iris-contrib/swagger/swaggerFiles"
 )
 
-// @title Swagger Example API
+// @title Go iris template Swagger API
 // @version 1.0
-// @description This is a sample server Petstore server.
+// @description This is server to represent the API information.
 // @termsOfService http://swagger.io/terms/
 
 // @contact.name API Support
@@ -37,8 +37,10 @@ func main() {
 
 	app := iris.New()
 
+	app.Logger().SetLevel("debug")
+
 	swaggerUI := swagger.Handler(swaggerFiles.Handler,
-		swagger.URL("/swagger/doc.json"),
+		swagger.URL("/swagger/swagger.json"),
 		swagger.DeepLinking(true),
 		swagger.Prefix("/swagger"),
 	)
@@ -49,7 +51,7 @@ func main() {
 	app.Get("/swagger/{any:path}", swaggerUI)
 
 	// 创建用户相关的路由组
-	authParty := app.Party("/auth")
+	authParty := app.Party("/v2/auth")
 	// 用户相关路由
 	authCtrl := controller.AuthController{}
 	userCtrl := controller.UserController{}
@@ -58,7 +60,7 @@ func main() {
 	authParty.Handle("POST", "/register", authCtrl.Register)
 	authParty.Handle("POST", "/login", authCtrl.Login)
 
-	userParty := app.Party("/user")
+	userParty := app.Party("/v2/user")
 
 	userParty.Handle("GET", "/", userCtrl.GetAllUsers)
 	userParty.Handle("GET", "/{id:uint64}", userCtrl.GetUserByID)
