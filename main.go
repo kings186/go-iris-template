@@ -7,7 +7,7 @@ import (
 
 	"github.com/kataras/iris/v12"
 
-	_ "github.com/kings186/go-iris-template/docs"
+	_ "go-iris-template/docs"
 
 	"github.com/iris-contrib/swagger"
 	"github.com/iris-contrib/swagger/swaggerFiles"
